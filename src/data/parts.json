@@ -1,0 +1,168 @@
+{
+    "cpus": [
+        {
+            "id": "cpu-intel-14900k",
+            "name": "Intel Core i9-14900K",
+            "price": 54999,
+            "image": "https://m.media-amazon.com/images/I/61p6cM8i4ZL._AC_SL1000_.jpg",
+            "specs": {
+                "socket": "LGA1700",
+                "cores": 24,
+                "threads": 32,
+                "base_clock": "3.2 GHz",
+                "boost_clock": "6.0 GHz",
+                "tdp": 125,
+                "integrated_graphics": true
+            },
+            "retailer": "Amazon.in"
+        },
+        {
+            "id": "cpu-amd-7800x3d",
+            "name": "AMD Ryzen 7 7800X3D",
+            "price": 36999,
+            "image": "https://m.media-amazon.com/images/I/51f2hkWjTlL._AC_SL1000_.jpg",
+            "specs": {
+                "socket": "AM5",
+                "cores": 8,
+                "threads": 16,
+                "base_clock": "4.2 GHz",
+                "boost_clock": "5.0 GHz",
+                "tdp": 120,
+                "integrated_graphics": true
+            },
+            "retailer": "MDComputers"
+        }
+    ],
+    "gpus": [
+        {
+            "id": "gpu-nvidia-4090",
+            "name": "ASUS ROG Strix GeForce RTX 4090 OC Edition",
+            "price": 185000,
+            "image": "https://m.media-amazon.com/images/I/81IcsvE1JFL._AC_SL1500_.jpg",
+            "specs": {
+                "memory": "24GB GDDR6X",
+                "length": 357,
+                "tdp": 450,
+                "recommended_psu": 1000
+            },
+            "retailer": "EliteHubs"
+        },
+        {
+            "id": "gpu-nvidia-4070ti-super",
+            "name": "Zotac Gaming GeForce RTX 4070 Ti Super Trinity",
+            "price": 78999,
+            "image": "https://m.media-amazon.com/images/I/71gY9wW8kVL._AC_SL1500_.jpg",
+            "specs": {
+                "memory": "16GB GDDR6X",
+                "length": 307,
+                "tdp": 285,
+                "recommended_psu": 750
+            },
+            "retailer": "Amazon.in"
+        }
+    ],
+    "motherboards": [
+        {
+            "id": "mobo-asus-z790",
+            "name": "ASUS ROG Maximus Z790 Dark Hero",
+            "price": 68999,
+            "image": "https://m.media-amazon.com/images/I/81+G9g+K7BL._AC_SL1500_.jpg",
+            "specs": {
+                "socket": "LGA1700",
+                "form_factor": "ATX",
+                "memory_type": "DDR5",
+                "max_memory": 192,
+                "slots": 4
+            },
+            "retailer": "MDComputers"
+        },
+        {
+            "id": "mobo-msi-b650",
+            "name": "MSI MAG B650 Tomahawk WiFi",
+            "price": 21500,
+            "image": "https://m.media-amazon.com/images/I/810+g+K7BL._AC_SL1500_.jpg",
+            "specs": {
+                "socket": "AM5",
+                "form_factor": "ATX",
+                "memory_type": "DDR5",
+                "max_memory": 128,
+                "slots": 4
+            },
+            "retailer": "Amazon.in"
+        }
+    ],
+    "ram": [
+        {
+            "id": "ram-corsair-ddr5-6000",
+            "name": "Corsair Vengeance RGB DDR5 32GB (2x16GB) 6000MHz",
+            "price": 11500,
+            "image": "https://m.media-amazon.com/images/I/61+G9g+K7BL._AC_SL1500_.jpg",
+            "specs": {
+                "type": "DDR5",
+                "speed": 6000,
+                "capacity": 32,
+                "modules": 2
+            },
+            "retailer": "EliteHubs"
+        }
+    ],
+    "storage": [
+        {
+            "id": "ssd-samsung-990pro-2tb",
+            "name": "Samsung 990 Pro 2TB NVMe SSD",
+            "price": 16999,
+            "image": "https://m.media-amazon.com/images/I/81+G9g+K7BL._AC_SL1500_.jpg",
+            "specs": {
+                "type": "NVMe M.2",
+                "capacity": 2000,
+                "read_speed": 7450
+            },
+            "retailer": "Amazon.in"
+        }
+    ],
+    "psu": [
+        {
+            "id": "psu-corsair-rm1000e",
+            "name": "Corsair RM1000e ATX 3.0 Fully Modular",
+            "price": 14500,
+            "image": "https://m.media-amazon.com/images/I/81+G9g+K7BL._AC_SL1500_.jpg",
+            "specs": {
+                "wattage": 1000,
+                "efficiency": "80+ Gold",
+                "modular": "Full"
+            },
+            "retailer": "MDComputers"
+        }
+    ],
+    "cases": [
+        {
+            "id": "case-lianli-o11",
+            "name": "Lian Li O11 Dynamic Evo",
+            "price": 13999,
+            "image": "https://m.media-amazon.com/images/I/81+G9g+K7BL._AC_SL1500_.jpg",
+            "specs": {
+                "form_factor": "ATX",
+                "max_gpu_length": 422,
+                "side_panel": "Tempered Glass"
+            },
+            "retailer": "EliteHubs"
+        }
+    ],
+    "coolers": [
+        {
+            "id": "cooler-nzxt-kraken-360",
+            "name": "NZXT Kraken Elite 360 RGB",
+            "price": 24999,
+            "image": "https://m.media-amazon.com/images/I/81+G9g+K7BL._AC_SL1500_.jpg",
+            "specs": {
+                "type": "AIO Liquid",
+                "size": 360,
+                "socket_support": [
+                    "LGA1700",
+                    "AM5"
+                ]
+            },
+            "retailer": "Amazon.in"
+        }
+    ]
+}

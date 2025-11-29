@@ -1,0 +1,21 @@
+version: '3.9'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pc-part-picker
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=file:/app/prisma/dev.db
+      - SMTP_HOST=${SMTP_HOST}
+      - SMTP_PORT=${SMTP_PORT}
+      - SMTP_USER=${SMTP_USER}
+      - SMTP_PASS=${SMTP_PASS}
+    volumes:
+      - ./prisma/dev.db:/app/prisma/dev.db
+    # Run migrations/push on startup if needed, or just rely on the mounted DB
+    # command: sh -c "npx prisma db push && node server.js" 
