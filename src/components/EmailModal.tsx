@@ -9,10 +9,10 @@ export function EmailModal({ build, onClose }: { build: BuildState, onClose: () 
         setStatus('sending');
         try {
             const parts = Object.values(build).flat().map((p: any) => ({
-                category: p.categoryId, // Simplified
+                category: p.category || 'Component',
                 name: p.name,
-                price: 0, // Mock
-                retailer: 'Unknown'
+                price: p.price || 0,
+                retailer: p.retailer || 'Unknown'
             }));
 
             const res = await fetch('/api/email', {

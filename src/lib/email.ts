@@ -1,28 +1,29 @@
 import nodemailer from 'nodemailer';
+import { decrypt } from './crypto';
 
 export interface EmailBuildData {
-    parts: {
-        category: string;
-        name: string;
-        price: number;
-        retailer: string;
-    }[];
-    totalPrice: number;
-    estimatedWattage: number;
+  parts: {
+    category: string;
+    name: string;
+    price: number;
+    retailer: string;
+  }[];
+  totalPrice: number;
+  estimatedWattage: number;
 }
 
 export async function sendBuildSummary(toEmail: string, buildData: EmailBuildData) {
-    const transporter = nodemailer.createTransport({
-        host: process.env.SMTP_HOST,
-        port: parseInt(process.env.SMTP_PORT || '587'),
-        secure: false, // true for 465, false for other ports
-        auth: {
-            user: process.env.SMTP_USER,
-            pass: process.env.SMTP_PASS,
-        },
-    });
+  const transporter = nodemailer.createTransport({
+    host: process.env.SMTP_HOST,
+    port: parseInt(process.env.SMTP_PORT || '587'),
+    secure: false, // true for 465, false for other ports
+    auth: {
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASS ? decrypt(process.env.SMTP_PASS) : undefined,
+    },
+  });
 
-    const partsTable = buildData.parts.map(part => `
+  const partsTable = buildData.parts.map(part => `
     <tr>
       <td style="padding: 8px; border: 1px solid #ddd;">${part.category}</td>
       <td style="padding: 8px; border: 1px solid #ddd;">${part.name}</td>
@@ -31,7 +32,7 @@ export async function sendBuildSummary(toEmail: string, buildData: EmailBuildDat
     </tr>
   `).join('');
 
-    const html = `
+  const html = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
       <h2>Your PC Build Summary</h2>
       <p>Here is the list of parts you selected:</p>
@@ -64,10 +65,10 @@ export async function sendBuildSummary(toEmail: string, buildData: EmailBuildDat
     </div>
   `;
 
-    await transporter.sendMail({
-        from: '"PC Part Picker India" <noreply@pcpartpicker.in>',
-        to: toEmail,
-        subject: 'Your PC Build Summary',
-        html,
-    });
+  await transporter.sendMail({
+    from: '"PC Part Picker India" <noreply@pcpartpicker.in>',
+    to: toEmail,
+    subject: 'Your PC Build Summary',
+    html,
+  });
 }

@@ -4,8 +4,11 @@ import { EmailModal } from './EmailModal';
 
 export function StatsPanel({ build, compatibility }: { build: BuildState, compatibility: CompatibilityResult }) {
     const [showEmail, setShowEmail] = useState(false);
-    // Calculate total price (mock logic for now)
-    const totalPrice = 0; // TODO: Sum up prices
+
+    // Calculate total price
+    const totalPrice = Object.values(build).flat().reduce((sum: number, part: any) => {
+        return sum + (part?.price || 0);
+    }, 0);
 
     return (
         <div className="space-y-6">
@@ -15,7 +18,7 @@ export function StatsPanel({ build, compatibility }: { build: BuildState, compat
                     {compatibility.valid ? 'Compatible' : 'Issues Found'}
                 </div>
                 {compatibility.messages.map((msg, idx) => (
-                    <div key={idx} className={`text-xs mt-1 ${msg.type === 'error' ? 'text-red-400' : 'text-yellow-400'}`}>
+                    <div key={idx} className={`text-xs mt-1 ${msg.type === 'error' ? 'text-red-400' : msg.type === 'warning' ? 'text-yellow-400' : 'text-blue-400'}`}>
                         • {msg.text}
                     </div>
                 ))}

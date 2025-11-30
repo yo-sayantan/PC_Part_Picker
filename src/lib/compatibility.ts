@@ -1,25 +1,4 @@
-export interface PartSpecs {
-    socket?: string;
-    tdp?: number;
-    memory_type?: string;
-    form_factor?: string;
-    length?: number; // mm
-    wattage?: number; // PSU capacity
-    max_gpu_length?: number;
-    max_cpu_cooler_height?: number;
-    radiator_support?: {
-        front?: number[];
-        top?: number[];
-        rear?: number[];
-    };
-    fan_support?: {
-        front?: string[];
-        top?: string[];
-        rear?: string[];
-    };
-    slots?: number; // RAM slots or PCIe slots
-    integrated_graphics?: boolean;
-}
+import { PartSpecs } from '@/lib/data';
 
 export interface BuildState {
     cpu?: { id: string; name: string; specs: PartSpecs; imageUrl?: string };
@@ -116,4 +95,69 @@ export function checkCompatibility(build: BuildState): CompatibilityResult {
         messages,
         estimatedWattage
     };
+}
+
+export function isPartCompatible(part: any, build: BuildState): { compatible: boolean; reason?: string } {
+    // 1. CPU <-> Motherboard Socket
+    if (part.category === 'cpu' && build.motherboard) {
+        if (part.specs?.socket !== build.motherboard.specs?.socket) {
+            return { compatible: false, reason: `Incompatible socket: CPU is ${part.specs?.socket}, Mobo is ${build.motherboard.specs?.socket}` };
+        }
+    }
+    if (part.category === 'motherboard' && build.cpu) {
+        if (part.specs?.socket !== build.cpu.specs?.socket) {
+            return { compatible: false, reason: `Incompatible socket: Mobo is ${part.specs?.socket}, CPU is ${build.cpu.specs?.socket}` };
+        }
+    }
+
+    // 2. RAM <-> Motherboard Type
+    if (part.category === 'ram' && build.motherboard) {
+        if (part.specs?.memory_type !== build.motherboard.specs?.memory_type) {
+            return { compatible: false, reason: `Incompatible memory: RAM is ${part.specs?.memory_type}, Mobo needs ${build.motherboard.specs?.memory_type}` };
+        }
+    }
+    if (part.category === 'motherboard' && build.ram && build.ram.length > 0) {
+        const ramType = (build.ram[0] as any).specs?.memory_type;
+        if (part.specs?.memory_type !== ramType) {
+            return { compatible: false, reason: `Incompatible memory: Mobo needs ${part.specs?.memory_type}, RAM is ${ramType}` };
+        }
+    }
+
+    // 3. Case Constraints
+    if (build.case) {
+        // GPU Length
+        if (part.category === 'gpu') {
+            const maxLen = build.case.specs?.max_gpu_length || 999;
+            if ((part.specs?.length || 0) > maxLen) {
+                return { compatible: false, reason: `GPU too long: ${part.specs?.length}mm > ${maxLen}mm` };
+            }
+        }
+        // Cooler Height
+        if (part.category === 'cooler') {
+            const maxHeight = build.case.specs?.max_cpu_cooler_height || 999;
+            if ((part.specs?.height || 0) > maxHeight) {
+                return { compatible: false, reason: `Cooler too tall: ${part.specs?.height}mm > ${maxHeight}mm` };
+            }
+        }
+    }
+
+    // Reverse Case Constraints (if adding a case)
+    if (part.category === 'case') {
+        if (build.gpu && build.gpu.length > 0) {
+            const maxLen = part.specs?.max_gpu_length || 999;
+            for (const gpu of build.gpu) {
+                if ((gpu.specs?.length || 0) > maxLen) {
+                    return { compatible: false, reason: `Case too small for GPU: Max ${maxLen}mm < ${gpu.specs?.length}mm` };
+                }
+            }
+        }
+        if (build.cooler) {
+            const maxHeight = part.specs?.max_cpu_cooler_height || 999;
+            if ((build.cooler.specs?.height || 0) > maxHeight) {
+                return { compatible: false, reason: `Case too small for Cooler: Max ${maxHeight}mm < ${build.cooler.specs?.height}mm` };
+            }
+        }
+    }
+
+    return { compatible: true };
 }

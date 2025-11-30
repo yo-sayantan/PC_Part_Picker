@@ -1,25 +1,23 @@
 import { NextResponse } from 'next/server';
-import { db } from '@/lib/db';
+import { loadPartsFromCSV } from '@/lib/data';
+
+export const dynamic = 'force-dynamic';
+
 
 export async function GET(request: Request) {
     try {
         const { searchParams } = new URL(request.url);
         const category = searchParams.get('category');
 
-        const where = category ? { category: { name: category } } : {};
+        let parts = loadPartsFromCSV();
 
-        const parts = await db.part.findMany({
-            where,
-            include: {
-                prices: {
-                    orderBy: { scrapedAt: 'desc' },
-                    take: 1
-                }
-            }
-        });
+        if (category) {
+            parts = parts.filter(p => p.category.toLowerCase() === category.toLowerCase());
+        }
 
         return NextResponse.json(parts);
     } catch (error) {
+        console.error('Error loading parts:', error);
         return NextResponse.json({ error: 'Failed to fetch parts' }, { status: 500 });
     }
 }

@@ -1,0 +1,10 @@
+const crypto = require('crypto');
+const keyHex = '7f8a9b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b2c3d4e5f6a7b8c9d0e1f2a';
+const iv = crypto.randomBytes(16);
+const key = Buffer.from(keyHex, 'hex');
+const cipher = crypto.createCipheriv('aes-256-cbc', key, iv);
+let encrypted = cipher.update('ynpu opxc iztq iqlr');
+encrypted = Buffer.concat([encrypted, cipher.final()]);
+const result = iv.toString('hex') + ':' + encrypted.toString('hex');
+const fs = require('fs');
+fs.writeFileSync('enc_output.txt', `KEY=${keyHex}\nENCRYPTED=${result}`);
