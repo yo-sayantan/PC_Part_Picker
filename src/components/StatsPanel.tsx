@@ -41,7 +41,12 @@ export function StatsPanel({ build, compatibility }: { build: BuildState, compat
                 Email Build Summary
             </button>
 
-            {showEmail && <EmailModal build={build} onClose={() => setShowEmail(false)} />}
+            {showEmail && <EmailModal
+                build={build}
+                totalPrice={totalPrice}
+                estimatedWattage={compatibility.estimatedWattage}
+                onClose={() => setShowEmail(false)}
+            />}
         </div>
     );
 }

@@ -22,6 +22,9 @@ export function encrypt(text: string): string {
 }
 
 export function decrypt(text: string): string {
+    if (!text.includes(':')) {
+        return text;
+    }
     const textParts = text.split(':');
     const ivHex = textParts.shift();
     if (!ivHex) throw new Error('Invalid encrypted text format');

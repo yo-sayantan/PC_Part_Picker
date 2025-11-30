@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { BuildState } from '@/lib/compatibility';
 
-export function EmailModal({ build, onClose }: { build: BuildState, onClose: () => void }) {
+export function EmailModal({ build, totalPrice, estimatedWattage, onClose }: { build: BuildState, totalPrice: number, estimatedWattage: number, onClose: () => void }) {
     const [email, setEmail] = useState('');
     const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
 
@@ -9,7 +9,7 @@ export function EmailModal({ build, onClose }: { build: BuildState, onClose: () 
         setStatus('sending');
         try {
             const parts = Object.values(build).flat().map((p: any) => ({
-                category: p.category || 'Component',
+                category: (p.category || 'Component').charAt(0).toUpperCase() + (p.category || 'Component').slice(1),
                 name: p.name,
                 price: p.price || 0,
                 retailer: p.retailer || 'Unknown'
@@ -22,8 +22,8 @@ export function EmailModal({ build, onClose }: { build: BuildState, onClose: () 
                     email,
                     buildData: {
                         parts,
-                        totalPrice: 0,
-                        estimatedWattage: 0
+                        totalPrice,
+                        estimatedWattage
                     }
                 })
             });

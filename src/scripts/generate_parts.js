@@ -21,6 +21,23 @@ const cpus = [
     { name: 'AMD Ryzen 9 5950X', price: 34999, specs: { socket: 'AM4', cores: 16, threads: 32, tdp: 105, integrated_graphics: false } },
     { name: 'AMD Ryzen 7 5800X3D', price: 28999, specs: { socket: 'AM4', cores: 8, threads: 16, tdp: 105, integrated_graphics: false } },
     { name: 'AMD Ryzen 5 5600X', price: 13999, specs: { socket: 'AM4', cores: 6, threads: 12, tdp: 65, integrated_graphics: false } },
+    // Historical CPUs (Last 5 Years)
+    // Intel 11th Gen
+    { name: 'Intel Core i9-11900K', price: 28999, specs: { socket: 'LGA1200', cores: 8, threads: 16, tdp: 125, integrated_graphics: true } },
+    { name: 'Intel Core i7-11700K', price: 22999, specs: { socket: 'LGA1200', cores: 8, threads: 16, tdp: 125, integrated_graphics: true } },
+    { name: 'Intel Core i5-11600K', price: 16999, specs: { socket: 'LGA1200', cores: 6, threads: 12, tdp: 125, integrated_graphics: true } },
+    // Intel 10th Gen
+    { name: 'Intel Core i9-10900K', price: 24999, specs: { socket: 'LGA1200', cores: 10, threads: 20, tdp: 125, integrated_graphics: true } },
+    { name: 'Intel Core i7-10700K', price: 18999, specs: { socket: 'LGA1200', cores: 8, threads: 16, tdp: 125, integrated_graphics: true } },
+    { name: 'Intel Core i5-10600K', price: 13999, specs: { socket: 'LGA1200', cores: 6, threads: 12, tdp: 125, integrated_graphics: true } },
+    { name: 'Intel Core i5-10400F', price: 8999, specs: { socket: 'LGA1200', cores: 6, threads: 12, tdp: 65, integrated_graphics: false } },
+    // AMD Ryzen 5000 Series (More)
+    { name: 'AMD Ryzen 9 5900X', price: 28999, specs: { socket: 'AM4', cores: 12, threads: 24, tdp: 105, integrated_graphics: false } },
+    { name: 'AMD Ryzen 7 5700X', price: 16999, specs: { socket: 'AM4', cores: 8, threads: 16, tdp: 65, integrated_graphics: false } },
+    // AMD Ryzen 3000 Series
+    { name: 'AMD Ryzen 9 3900X', price: 22999, specs: { socket: 'AM4', cores: 12, threads: 24, tdp: 105, integrated_graphics: false } },
+    { name: 'AMD Ryzen 7 3700X', price: 14999, specs: { socket: 'AM4', cores: 8, threads: 16, tdp: 65, integrated_graphics: false } },
+    { name: 'AMD Ryzen 5 3600', price: 8500, specs: { socket: 'AM4', cores: 6, threads: 12, tdp: 65, integrated_graphics: false } },
 ];
 
 const mobos = [
@@ -48,6 +65,10 @@ const mobos = [
     { name: 'Gigabyte Z690 AORUS Master', price: 35999, specs: { socket: 'LGA1700', form_factor: 'E-ATX', memory_type: 'DDR5', ram_slots: 4, m2_slots: 5, pcie_slots: 3 } },
     { name: 'MSI PRO B760M-A WiFi', price: 14500, specs: { socket: 'LGA1700', form_factor: 'mATX', memory_type: 'DDR5', ram_slots: 4, m2_slots: 2, pcie_slots: 2 } },
     { name: 'ASUS ROG Strix B550-F Gaming', price: 17500, specs: { socket: 'AM4', form_factor: 'ATX', memory_type: 'DDR4', ram_slots: 4, m2_slots: 2, pcie_slots: 2 } },
+    // LGA1200 Motherboards (for 10th/11th Gen)
+    { name: 'ASUS ROG Strix Z590-E Gaming WiFi', price: 24999, specs: { socket: 'LGA1200', form_factor: 'ATX', memory_type: 'DDR4', ram_slots: 4, m2_slots: 4, pcie_slots: 3 } },
+    { name: 'MSI MAG B560 Tomahawk WiFi', price: 15999, specs: { socket: 'LGA1200', form_factor: 'ATX', memory_type: 'DDR4', ram_slots: 4, m2_slots: 3, pcie_slots: 2 } },
+    { name: 'Gigabyte Z490 AORUS Elite AC', price: 18999, specs: { socket: 'LGA1200', form_factor: 'ATX', memory_type: 'DDR4', ram_slots: 4, m2_slots: 2, pcie_slots: 2 } },
 ];
 
 const gpus = [
@@ -70,6 +91,29 @@ const gpus = [
     { name: 'Sapphire Pulse RX 7800 XT', price: 51999, specs: { memory: '16GB GDDR6', length: 280, tdp: 263, pcie_slots: 2.5 } },
     { name: 'ASRock Challenger RX 7700 XT', price: 42999, specs: { memory: '12GB GDDR6', length: 266, tdp: 245, pcie_slots: 2.5 } },
     { name: 'Sapphire Pulse RX 7600', price: 26999, specs: { memory: '8GB GDDR6', length: 240, tdp: 165, pcie_slots: 2 } },
+    // NVIDIA RTX 30 Series
+    { name: 'ASUS ROG Strix RTX 3090 OC', price: 125000, specs: { memory: '24GB GDDR6X', length: 318, tdp: 350, pcie_slots: 2.9 } },
+    { name: 'MSI Gaming Z Trio RTX 3080', price: 69999, specs: { memory: '10GB GDDR6X', length: 323, tdp: 320, pcie_slots: 2.7 } },
+    { name: 'Gigabyte Vision RTX 3070 Ti', price: 52999, specs: { memory: '8GB GDDR6X', length: 320, tdp: 290, pcie_slots: 2.7 } },
+    { name: 'Zotac Twin Edge RTX 3060 Ti', price: 32999, specs: { memory: '8GB GDDR6', length: 222, tdp: 200, pcie_slots: 2 } },
+    { name: 'ASUS Dual RTX 3050 OC', price: 19999, specs: { memory: '8GB GDDR6', length: 200, tdp: 130, pcie_slots: 2 } },
+    // NVIDIA RTX 20 Series
+    { name: 'ASUS ROG Strix RTX 2080 Super', price: 45000, specs: { memory: '8GB GDDR6', length: 300, tdp: 250, pcie_slots: 2.7 } },
+    { name: 'Gigabyte Windforce RTX 2070 Super', price: 35000, specs: { memory: '8GB GDDR6', length: 280, tdp: 215, pcie_slots: 2.5 } },
+    { name: 'Zotac Gaming RTX 2060 Super', price: 25000, specs: { memory: '8GB GDDR6', length: 210, tdp: 175, pcie_slots: 2 } },
+    { name: 'MSI Ventus RTX 2060', price: 19999, specs: { memory: '6GB GDDR6', length: 226, tdp: 160, pcie_slots: 2 } },
+    // AMD RX 6000 Series
+    { name: 'Sapphire Nitro+ RX 6900 XT', price: 65000, specs: { memory: '16GB GDDR6', length: 310, tdp: 300, pcie_slots: 2.7 } },
+    { name: 'ASRock Phantom Gaming RX 6800 XT', price: 49999, specs: { memory: '16GB GDDR6', length: 330, tdp: 300, pcie_slots: 2.7 } },
+    { name: 'PowerColor Red Devil RX 6700 XT', price: 32999, specs: { memory: '12GB GDDR6', length: 320, tdp: 230, pcie_slots: 2.5 } },
+    { name: 'Sapphire Pulse RX 6600 XT', price: 22999, specs: { memory: '8GB GDDR6', length: 240, tdp: 160, pcie_slots: 2 } },
+    // AMD RX 5000 Series
+    { name: 'Sapphire Pulse RX 5700 XT', price: 25000, specs: { memory: '8GB GDDR6', length: 254, tdp: 225, pcie_slots: 2 } },
+    { name: 'Gigabyte Gaming OC RX 5600 XT', price: 18000, specs: { memory: '6GB GDDR6', length: 280, tdp: 150, pcie_slots: 2 } },
+    // Intel Arc
+    { name: 'Intel Arc A770 Limited Edition', price: 28999, specs: { memory: '16GB GDDR6', length: 270, tdp: 225, pcie_slots: 2 } },
+    { name: 'Intel Arc A750 Limited Edition', price: 19999, specs: { memory: '8GB GDDR6', length: 270, tdp: 225, pcie_slots: 2 } },
+    { name: 'ASRock Challenger Arc A380', price: 10999, specs: { memory: '6GB GDDR6', length: 190, tdp: 75, pcie_slots: 2 } },
 ];
 
 const rams = [
@@ -146,7 +190,18 @@ const coolers = [
     { name: 'Cooler Master Hyper 212 Halo', price: 3200, specs: { type: 'Air', height: 154, socket_support: 'LGA1700,AM5' } },
     { name: 'Deepcool AG400 ARGB', price: 1800, specs: { type: 'Air', height: 150, socket_support: 'LGA1700,AM5' } },
     { name: 'Ant Esports ICE-C612 V2', price: 2500, specs: { type: 'Air', height: 160, socket_support: 'LGA1700,AM5' } },
+    // New Coolers
+    { name: 'Razer Hanbo Chroma RGB 360', price: 28999, specs: { type: 'AIO Liquid', size: 360, height: 52, socket_support: 'LGA1700,AM5' } },
+    { name: 'NZXT Kraken 240 RGB', price: 13999, specs: { type: 'AIO Liquid', size: 240, height: 52, socket_support: 'LGA1700,AM5' } },
+    { name: 'Lian Li Galahad 240', price: 9999, specs: { type: 'AIO Liquid', size: 240, height: 52, socket_support: 'LGA1700,AM5' } },
+    { name: 'Deepcool LE500 240mm', price: 5500, specs: { type: 'AIO Liquid', size: 240, height: 52, socket_support: 'LGA1700,AM5' } },
 ];
+
+// Add Razer Case
+cases.push({ name: 'Razer Tomahawk ATX', price: 18999, specs: { form_factor: 'ATX', max_gpu_length: 384, max_cpu_cooler_height: 176, radiator_support: '360' } });
+cases.push({ name: 'Lian Li O11 Vision', price: 14500, specs: { form_factor: 'ATX', max_gpu_length: 455, max_cpu_cooler_height: 167, radiator_support: '360' } });
+cases.push({ name: 'NZXT H6 Flow', price: 10999, specs: { form_factor: 'ATX', max_gpu_length: 365, max_cpu_cooler_height: 163, radiator_support: '360' } });
+cases.push({ name: 'Deepcool CH510 Mesh Digital', price: 7500, specs: { form_factor: 'ATX', max_gpu_length: 380, max_cpu_cooler_height: 175, radiator_support: '360' } });
 
 const allParts = [
     ...cpus.map(p => ({ ...p, category: 'cpu' })),
@@ -162,8 +217,9 @@ const allParts = [
 const header = 'id,name,category,price,retailer,url,imageUrl,specs,lastUpdated';
 const rows = allParts.map((p, i) => {
     const id = `${p.category}-${i}`;
-    const retailer = retailers[Math.floor(Math.random() * retailers.length)];
-    const url = 'https://example.com';
+    // Prefer Amazon (70% chance), otherwise random
+    const retailer = Math.random() < 0.7 ? 'Amazon' : retailers[Math.floor(Math.random() * retailers.length)];
+    const url = 'https://amazon.in';
     // Use placeholder images that look like the component
     const imageUrl = `https://placehold.co/200x200/1a1a1a/FFF?text=${p.category.toUpperCase()}`;
     const specs = JSON.stringify(p.specs).replace(/"/g, '""');

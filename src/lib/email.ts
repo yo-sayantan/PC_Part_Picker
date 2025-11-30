@@ -19,7 +19,16 @@ export async function sendBuildSummary(toEmail: string, buildData: EmailBuildDat
     secure: false, // true for 465, false for other ports
     auth: {
       user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS ? decrypt(process.env.SMTP_PASS) : undefined,
+      pass: (() => {
+        const pass = process.env.SMTP_PASS;
+        if (!pass) return undefined;
+        try {
+          return decrypt(pass);
+        } catch (e) {
+          console.warn('SMTP_PASS decryption failed, using as plain text:', e);
+          return pass;
+        }
+      })(),
     },
   });
 
