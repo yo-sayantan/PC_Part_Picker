@@ -1,3 +1,5 @@
+# Docker Compose Configuration for PC Part Picker
+
 version: '3.9'
 
 services:
@@ -17,7 +19,10 @@ services:
       - SMTP_USER=${SMTP_USER}
       - SMTP_PASS=${SMTP_PASS}
       - NODE_OPTIONS=--inspect=0.0.0.0:9229
+      # Puppeteer environment variables
+      - PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+      - PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
     volumes:
       - ./prisma/dev.db:/app/prisma/dev.db
-    # Run migrations/push on startup if needed, or just rely on the mounted DB
-    # command: sh -c "npx prisma db push && node server.js" 
+    # Uncomment to run migrations on startup
+    # command: sh -c "npx prisma db push && node server.js"

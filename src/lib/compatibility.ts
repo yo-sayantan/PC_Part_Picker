@@ -22,14 +22,14 @@ export interface PartSpecs {
 }
 
 export interface BuildState {
-    cpu?: { id: string; name: string; specs: PartSpecs };
-    motherboard?: { id: string; name: string; specs: PartSpecs };
-    ram?: { id: string; name: string; specs: PartSpecs }[];
-    gpu?: { id: string; name: string; specs: PartSpecs }[];
-    storage?: { id: string; name: string; specs: PartSpecs }[];
-    psu?: { id: string; name: string; specs: PartSpecs };
-    case?: { id: string; name: string; specs: PartSpecs };
-    cooler?: { id: string; name: string; specs: PartSpecs };
+    cpu?: { id: string; name: string; specs: PartSpecs; imageUrl?: string };
+    motherboard?: { id: string; name: string; specs: PartSpecs; imageUrl?: string };
+    ram?: { id: string; name: string; specs: PartSpecs; imageUrl?: string }[];
+    gpu?: { id: string; name: string; specs: PartSpecs; imageUrl?: string }[];
+    storage?: { id: string; name: string; specs: PartSpecs; imageUrl?: string }[];
+    psu?: { id: string; name: string; specs: PartSpecs; imageUrl?: string };
+    case?: { id: string; name: string; specs: PartSpecs; imageUrl?: string };
+    cooler?: { id: string; name: string; specs: PartSpecs; imageUrl?: string };
 }
 
 export interface CompatibilityResult {

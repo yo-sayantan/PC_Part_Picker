@@ -1,0 +1,25 @@
+# Development Docker Compose Configuration
+# Use this for development with hot-reload
+
+version: '3.9'
+
+services:
+  web-dev:
+    image: node:20-alpine
+    container_name: pc-part-picker-dev
+    working_dir: /app
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=file:/app/prisma/dev.db
+      - SMTP_HOST=${SMTP_HOST}
+      - SMTP_PORT=${SMTP_PORT}
+      - SMTP_USER=${SMTP_USER}
+      - SMTP_PASS=${SMTP_PASS}
+      - PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+      - PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    command: sh -c "apk add --no-cache chromium nss freetype harfbuzz ca-certificates ttf-freefont && npm install && npx prisma generate && npm run dev"
